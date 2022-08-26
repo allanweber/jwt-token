@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.allanweber.jwttoken.JwtTokenAuthenticationFilter,\
+com.allanweber.jwttoken.service.impl.JwtTokenAuthenticationCheckImpl,\
 com.allanweber.jwttoken.service.impl.AccessTokenResolver,\
 com.allanweber.jwttoken.service.impl.JwtResolveTokenHttpHeader,\
 com.allanweber.jwttoken.service.impl.JwtTokenParserImpl,\
