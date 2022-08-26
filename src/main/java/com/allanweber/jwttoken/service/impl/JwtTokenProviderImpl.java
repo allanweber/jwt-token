@@ -1,7 +1,7 @@
 package com.allanweber.jwttoken.service.impl;
 
 import com.allanweber.jwttoken.JwtException;
-import com.allanweber.jwttoken.contract.JwtUser;
+import com.allanweber.jwttoken.contract.JwtUserData;
 import com.allanweber.jwttoken.data.JwtProperties;
 import com.allanweber.jwttoken.data.TokenData;
 import com.allanweber.jwttoken.helper.DateHelper;
@@ -44,8 +44,8 @@ public class JwtTokenProviderImpl implements JwtTokenProvider {
     }
 
     @Override
-    public TokenData generateAccessToken(JwtUser user) {
-        List<String> authorities = new ArrayList<>(ofNullable(user.getAuthorities())
+    public TokenData generateAccessToken(JwtUserData user) {
+        List<String> authorities = new ArrayList<>(ofNullable(user.getUserAuthoritiesName())
                 .filter(list -> !list.isEmpty())
                 .orElseThrow(() -> new JwtException(HttpStatus.UNAUTHORIZED, "User has no authorities")));
 
@@ -55,12 +55,12 @@ public class JwtTokenProviderImpl implements JwtTokenProvider {
                 .setHeaderParam(JwtConstants.HEADER_TYP, JwtConstants.TOKEN_TYPE)
                 .setIssuer(properties.getIssuer())
                 .setAudience(properties.getAudience())
-                .setSubject(user.getEmail())
+                .setSubject(user.getUserEmail())
                 .setIssuedAt(issuedAt)
                 .setExpiration(getExpirationDate(properties.getAccessTokenExpiration()))
                 .claim(JwtConstants.SCOPES, authorities)
-                .claim(JwtConstants.TENANCY_ID, ofNullable(user.getTenancyId()))
-                .claim(JwtConstants.TENANCY_NAME, ofNullable(user.getTenancyName()))
+                .claim(JwtConstants.TENANCY_ID, user.getUserTenancyId())
+                .claim(JwtConstants.TENANCY_NAME, user.getUserTenancyName())
                 .compact();
 
         return new TokenData(accessToken,
@@ -68,14 +68,14 @@ public class JwtTokenProviderImpl implements JwtTokenProvider {
     }
 
     @Override
-    public TokenData generateRefreshToken(JwtUser user) {
+    public TokenData generateRefreshToken(JwtUserData user) {
         Date issuedAt = DateHelper.getUTCDatetimeAsDate();
         String refreshToken = Jwts.builder()
                 .signWith(this.privateKey, SignatureAlgorithm.RS256)
                 .setHeaderParam(JwtConstants.HEADER_TYP, JwtConstants.TOKEN_TYPE)
                 .setIssuer(properties.getIssuer())
                 .setAudience(properties.getAudience())
-                .setSubject(user.getEmail())
+                .setSubject(user.getUserEmail())
                 .setIssuedAt(issuedAt)
                 .setExpiration(getExpirationDate(properties.getRefreshTokenExpiration()))
                 .claim(JwtConstants.SCOPES, Collections.singletonList(JwtConstants.REFRESH_TOKEN))

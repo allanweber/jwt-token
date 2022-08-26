@@ -49,10 +49,10 @@ public class JwtTokenProviderImplTest {
     @DisplayName("Given user and its roles when generateAccessToken, return JWT token")
     void generateAccessToken() {
         JwtUserTest applicationUser = JwtUserTest.builder()
-                .email("mail@mail.com")
-                .authorities(Collections.singletonList("ROLE_USER"))
-                .tenancyId(1L)
-                .tenancyName("tenancy")
+                .userEmail("mail@mail.com")
+                .userAuthoritiesName(Collections.singletonList("ROLE_USER"))
+                .userTenancyId(1L)
+                .userTenancyName("tenancy")
                 .build();
         TokenData tokenData = tokenProvider.generateAccessToken(applicationUser);
 
@@ -64,10 +64,10 @@ public class JwtTokenProviderImplTest {
     @DisplayName("Given user and its roles when generateRefreshToken, return JWT token")
     void generateRefreshToken() {
         JwtUserTest applicationUser = JwtUserTest.builder()
-                .email("mail@mail.com")
-                .authorities(Collections.singletonList("ROLE_USER"))
-                .tenancyId(1L)
-                .tenancyName("tenancy")
+                .userEmail("mail@mail.com")
+                .userAuthoritiesName(Collections.singletonList("ROLE_USER"))
+                .userTenancyId(1L)
+                .userTenancyName("tenancy")
                 .build();
 
         TokenData tokenData = tokenProvider.generateRefreshToken(applicationUser);
@@ -89,10 +89,10 @@ public class JwtTokenProviderImplTest {
     @DisplayName("Given user with null roles when generateAccessToken, return exception")
     void nullRoles() {
         JwtUserTest applicationUser = JwtUserTest.builder()
-                .email("mail@mail.com")
-                .authorities(null)
-                .tenancyId(1L)
-                .tenancyName("tenancy")
+                .userEmail("mail@mail.com")
+                .userAuthoritiesName(null)
+                .userTenancyId(1L)
+                .userTenancyName("tenancy")
                 .build();
 
         JwtException exception = assertThrows(
@@ -107,10 +107,10 @@ public class JwtTokenProviderImplTest {
     @DisplayName("Given user with empty roles when generateAccessToken, return exception")
     void emptyRoles() throws IOException, NoSuchAlgorithmException {
         JwtUserTest applicationUser = JwtUserTest.builder()
-                .email("mail@mail.com")
-                .authorities(emptyList())
-                .tenancyId(1L)
-                .tenancyName("tenancy")
+                .userEmail("mail@mail.com")
+                .userAuthoritiesName(emptyList())
+                .userTenancyId(1L)
+                .userTenancyName("tenancy")
                 .build();
 
         when(privateKeyProvider.provide(new File("arg"))).thenReturn(mockPrivateKey());

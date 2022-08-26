@@ -1,6 +1,6 @@
 package com.allanweber.jwttoken;
 
-import com.allanweber.jwttoken.contract.JwtUser;
+import com.allanweber.jwttoken.contract.JwtUserData;
 import lombok.*;
 
 import java.util.List;
@@ -10,12 +10,12 @@ import java.util.List;
 @Builder
 @Getter
 @EqualsAndHashCode
-public class JwtUserTest implements JwtUser {
-    private List<String> authorities;
+public class JwtUserTest implements JwtUserData {
+    private List<String> userAuthoritiesName;
 
-    private String email;
+    private String userEmail;
 
-    private Long tenancyId;
+    private Long userTenancyId;
 
-    private String tenancyName;
+    private String userTenancyName;
 }
