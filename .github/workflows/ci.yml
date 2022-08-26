@@ -40,7 +40,7 @@ jobs:
       - uses: codecov/codecov-action@v1
         with:
           file: ./**/target/site/jacoco/jacoco.xml
-          token: 5a4f952e-0335-494b-bf5a-d424cba4955b
+          token: 04360aad-79dc-41fd-a7c6-41b8bbb8baf1
           name: codecov
 
   publish:
