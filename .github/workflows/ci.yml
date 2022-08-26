@@ -56,7 +56,7 @@ jobs:
       - name: Publish package
         run: mvn -B deploy
         env:
-          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
       - name: Get Version
         id: get-version
         uses: noobly314/share-data@v1
