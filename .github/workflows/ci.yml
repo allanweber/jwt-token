@@ -37,9 +37,9 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
       - run: mvn -B verify -P coverage --no-transfer-progress
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v1
         with:
-          files: ./**/target/site/jacoco/jacoco.xml
+          file: ./**/target/site/jacoco/jacoco.xml
           token: 653a6944-f94d-46dc-a800-5297c0f4137a
           name: codecov
 
