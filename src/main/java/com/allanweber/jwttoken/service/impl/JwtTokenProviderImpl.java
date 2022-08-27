@@ -11,6 +11,7 @@ import com.allanweber.jwttoken.service.PrivateKeyProvider;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ import java.util.List;
 import static java.util.Optional.ofNullable;
 
 @Service
+@ConditionalOnProperty(prefix = "application.authentication.jwt", name = "service-type", havingValue = "PROVIDER")
 @Slf4j
 public class JwtTokenProviderImpl implements JwtTokenProvider {
 
