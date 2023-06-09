@@ -2,7 +2,7 @@ package com.allanweber.jwttoken.service;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface JwtTokenAuthenticationCheck {
 

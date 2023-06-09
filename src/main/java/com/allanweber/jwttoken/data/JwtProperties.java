@@ -1,6 +1,8 @@
 package com.allanweber.jwttoken.data;
 
 import com.allanweber.jwttoken.JwtException;
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
 import java.io.File;
 
 @ConfigurationProperties("application.authentication.jwt")

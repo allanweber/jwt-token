@@ -96,7 +96,7 @@ public class JwtTokenParserImplTest {
                 () -> jwtTokenParser.parseToken(token));
 
         assertThat(exception.getMessage()).contains("Request to parse expired JWT");
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class JwtTokenParserImplTest {
                 () -> jwtTokenParser.parseToken(token));
 
         assertThat(exception.getMessage()).contains("Request to parse JWT with invalid signature");
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     @DisplayName("Given token return MalformedJwtException")
@@ -144,7 +144,7 @@ public class JwtTokenParserImplTest {
                 () -> jwtTokenParser.parseToken("1231231231321"));
 
         assertThat(exception.getMessage()).contains("Request to parse invalid JWT");
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     @DisplayName("Given token return IllegalArgumentException")
@@ -159,7 +159,7 @@ public class JwtTokenParserImplTest {
                 () -> jwtTokenParser.parseToken(""));
 
         assertThat(exception.getMessage()).contains("Request to parse empty or null JWT");
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     private KeyPair mockKeyPair() throws NoSuchAlgorithmException {

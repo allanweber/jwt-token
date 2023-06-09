@@ -100,7 +100,7 @@ public class JwtTokenProviderImplTest {
                 () -> tokenProvider.generateAccessToken(applicationUser),
                 "User has no authorities");
 
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     @Test
@@ -120,7 +120,7 @@ public class JwtTokenProviderImplTest {
                 () -> tokenProvider.generateAccessToken(applicationUser),
                 "User has no authorities");
 
-        assertThat(exception.getRawStatusCode()).isEqualTo(401);
+        assertThat(exception.getStatusCode().value()).isEqualTo(401);
     }
 
     private PrivateKey mockPrivateKey() throws NoSuchAlgorithmException {
