@@ -19,7 +19,7 @@ jobs:
     - name: Build with Maven
       run: |
         mvn -B clean package --file pom.xml
-        echo "APP_VERSION=$(mvn --file pom.xml --settings settings.xml  -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> "$GITHUB_OUTPUT"
+        echo "APP_VERSION=$(mvn --file pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> "$GITHUB_OUTPUT"
       id: build-version
 
   coverage:
